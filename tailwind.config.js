@@ -15,10 +15,18 @@ const baseSansFonts = [
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.white"),
+          },
+        },
+      }),
+    },
     fontFamily: {
       sans: baseSansFonts,
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };
