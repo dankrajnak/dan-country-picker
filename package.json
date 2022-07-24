@@ -11,9 +11,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^0.27.2",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-globe.gl": "^2.22.1",
     "recoil": "^0.7.4"
   },
   "devDependencies": {
