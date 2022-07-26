@@ -1,7 +1,4 @@
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Globe from "react-globe.gl";
 
 import {
   GetStaticPaths,
@@ -10,8 +7,8 @@ import {
   InferGetStaticPropsType,
 } from "next/types";
 import useDiscount from "../../hooks/useDiscount";
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import Globe from "../../components/Globe";
 
 export type Country = {
   name: string;
@@ -139,28 +136,33 @@ const Country = ({
   return (
     <>
       <Suspense fallback={null}>
-        {/* <DynamicGlobe
-          globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-          arcColor={() => "darkOrange"}
-          arcDashLength={ARC_REL_LEN}
-          arcDashGap={2}
-          arcDashInitialGap={1}
-          arcDashAnimateTime={FLIGHT_TIME}
-          arcsTransitionDuration={0}
-          ringColor={() => (t) => `rgba(255,100,50,${1 - t})`}
-          ringMaxRadius={RINGS_MAX_R}
-          ringPropagationSpeed={RING_PROPAGATION_SPEED}
-          ringRepeatPeriod={(FLIGHT_TIME * ARC_REL_LEN) / NUM_RINGS}
-        /> */}
+        {
+          <div style={{ position: "absolute", height: "100%", width: "100%" }}>
+            <Globe />
+          </div>
+        }
       </Suspense>
-      <div className="grid h-screen place-items-center text-white ">
-        <div className=" border-white border-1">
-          <h1 className="text-2xl tracking-tight font-extrabold mb-5">
-            <span className=" font-light">{country.city},</span> {country.name}
-          </h1>
-          {flightInfo && (
-            <FlightInfo flightInfo={flightInfo} country={country} />
-          )}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 20,
+          marginLeft: "auto",
+          marginRight: "auto",
+          zIndex: 0,
+          width: "100%",
+          // textAlign: "center",
+        }}
+      >
+        <div className="text-white ">
+          <div className=" border-white border-1">
+            <h1 className="text-2xl tracking-tight font-extrabold mb-5">
+              <span className=" font-light">{country.city},</span>{" "}
+              {country.name}
+            </h1>
+            {flightInfo && (
+              <FlightInfo flightInfo={flightInfo} country={country} />
+            )}
+          </div>
         </div>
       </div>
     </>
