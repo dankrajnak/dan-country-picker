@@ -11,7 +11,7 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
-const PATH = "/globe/scene.gltf";
+const PATH = "/globeSmall/scene.gltf";
 
 type GLTFResult = GLTF & {
   nodes: {
