@@ -413,11 +413,6 @@
       "name": "Take 001",
       "samplers": [
         {
-          "input": 9,
-          "output": 10,
-          "interpolation": "LINEAR"
-        },
-        {
           "input": 11,
           "output": 12,
           "interpolation": "LINEAR"
@@ -426,13 +421,6 @@
       "channels": [
         {
           "sampler": 0,
-          "target": {
-            "node": 4,
-            "path": "rotation"
-          }
-        },
-        {
-          "sampler": 1,
           "target": {
             "node": 6,
             "path": "rotation"
