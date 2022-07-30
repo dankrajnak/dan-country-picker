@@ -161,7 +161,7 @@ const Content = () => {
       <PerspectiveCamera ref={cameraRef} makeDefault />
 
       {/* <OrbitControls minDistance={160} zoomSpeed={0.1} /> */}
-      <ambientLight />
+      {/* <ambientLight /> */}
 
       <a.group
         // @ts-ignore
