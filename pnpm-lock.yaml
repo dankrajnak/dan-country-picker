@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@react-spring/three': ^9.5.2
   '@react-three/drei': ^9.17.3
   '@react-three/fiber': ^8.2.1
   '@react-three/postprocessing': ^2.5.4
@@ -11,6 +12,7 @@ specifiers:
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   '@types/three': ^0.142.0
+  '@use-gesture/react': ^10.2.17
   autoprefixer: ^10.4.7
   axios: ^0.27.2
   d3-geo: ^3.0.1
@@ -46,6 +48,7 @@ dependencies:
   three-stdlib: 2.12.1_three@0.142.0
 
 devDependencies:
+  '@react-spring/three': 9.5.2_3uguwpggri6ok736wj7gxuhaha
   '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.6
   '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
   '@types/d3-geo': 3.0.2
@@ -53,6 +56,7 @@ devDependencies:
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   '@types/three': 0.142.0
+  '@use-gesture/react': 10.2.17_react@18.2.0
   autoprefixer: 10.4.7_postcss@8.4.14
   eslint: 8.20.0
   eslint-config-next: 12.2.3_he2ccbldppg44uulnyq4rwocfa
@@ -291,7 +295,6 @@ packages:
       '@react-spring/shared': 9.5.2_react@18.2.0
       '@react-spring/types': 9.5.2
       react: 18.2.0
-    dev: false
 
   /@react-spring/core/9.5.2_react@18.2.0:
     resolution: {integrity: sha512-UMRtFH6EfebMp/NMDGCUY5+hZFXsg9iT9hzt/iPzJSz2WMXKBjLoFZHJXcmiVOrIhzHmg1O0pFECn1Wp6pZ5Gw==}
@@ -303,11 +306,9 @@ packages:
       '@react-spring/shared': 9.5.2_react@18.2.0
       '@react-spring/types': 9.5.2
       react: 18.2.0
-    dev: false
 
   /@react-spring/rafz/9.5.2:
     resolution: {integrity: sha512-xHSRXKKBI/wDUkZGrspkOm4VlgN6lZi8Tw9Jzibp9QKf3neoof+U2mDNgklvnLaasymtUwAq9o4ZfFvQIVNgPQ==}
-    dev: false
 
   /@react-spring/shared/9.5.2_react@18.2.0:
     resolution: {integrity: sha512-/OSf2sjwY4BUnjZL6xMC+H3WxOOhMUCk+yZwgdj40XuyUpk6E6tYyiPeD9Yq5GLsZHodkvE1syVMRVReL4ndAg==}
@@ -317,7 +318,6 @@ packages:
       '@react-spring/rafz': 9.5.2
       '@react-spring/types': 9.5.2
       react: 18.2.0
-    dev: false
 
   /@react-spring/three/9.5.2_3uguwpggri6ok736wj7gxuhaha:
     resolution: {integrity: sha512-3H7Lv8BJZ3dajh0yJA3m9rEbqz5ZNrTCAkhVOeLqgvBlcWU5qVs4luYA1Z7H4vZnLqVtzv+kHAyg3XIpuTOXhQ==}
@@ -333,11 +333,9 @@ packages:
       '@react-three/fiber': 8.2.1_5kidazjkmgjhxqotnaqokpbepa
       react: 18.2.0
       three: 0.142.0
-    dev: false
 
   /@react-spring/types/9.5.2:
     resolution: {integrity: sha512-n/wBRSHPqTmEd4BFWY6TeR1o/UY+3ujoqMxLjqy90CcY/ozJzDRuREL3c+pxMeTF2+B7dX33dTPCtFMX51nbxg==}
-    dev: false
 
   /@react-three/drei/9.17.3_vbfuau4xnz7crjyzqcrd32y7ju:
     resolution: {integrity: sha512-c30mEvFdh9I311UelJeCqKRIcDcV1D9KfgYSK9Tn7/IiSUH7ytQQYw/LyB6FXCVBWq/i2qAcDvJ79scPBZ+WUQ==}
@@ -405,7 +403,6 @@ packages:
       suspend-react: 0.0.8_react@18.2.0
       three: 0.142.0
       zustand: 3.7.2_react@18.2.0
-    dev: false
 
   /@react-three/postprocessing/2.5.4_3uguwpggri6ok736wj7gxuhaha:
     resolution: {integrity: sha512-w5P7mx/mt6Attumm3sygEcqDrqlrz3AN6tdnm6RuqKUeFaBO2RsJjYF0hvxKHaW67GQPJbHQGK9wpb8iSHvAGw==}
@@ -484,7 +481,6 @@ packages:
     resolution: {integrity: sha512-mBDYl8x+oyPX/VBb3E638N0B7xG+SPk/EAMcVPeexqus/5aTpTphQi0curhhshOqRrc9t6OPoJfEUkbymse/lQ==}
     dependencies:
       '@types/react': 18.0.15
-    dev: false
 
   /@types/react/18.0.15:
     resolution: {integrity: sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==}
@@ -570,7 +566,6 @@ packages:
 
   /@use-gesture/core/10.2.17:
     resolution: {integrity: sha512-62hCybe4x6oGZ1/JA9gSYIdghV1FqxCdvYWt9SqCEAAikwT1OmVl2Q/Uu8CP636L57D+DfXtw6PWM+fdhr4oJQ==}
-    dev: false
 
   /@use-gesture/react/10.2.17_react@18.2.0:
     resolution: {integrity: sha512-Vfrp1KgdYn/kOEUAYNXtGBCl2dr38s3G6rru1TOPs+cVUjfNyNxvJK56grUyJ336N3rQLK8F9G7+FfrHuc3g/Q==}
@@ -579,7 +574,6 @@ packages:
     dependencies:
       '@use-gesture/core': 10.2.17
       react: 18.2.0
-    dev: false
 
   /@webgpu/glslang/0.0.15:
     resolution: {integrity: sha512-niT+Prh3Aff8Uf1MVBVUsaNjFj9rJAKDXuoHIKiQbB+6IUP/3J3JIhBNyZ7lDhytvXxw6ppgnwKZdDJ08UMj4Q==}
@@ -967,7 +961,6 @@ packages:
 
   /debounce/1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
-    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -2482,7 +2475,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -2500,7 +2492,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.21.0
-    dev: false
 
   /react-use-measure/2.1.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}
@@ -2511,14 +2502,12 @@ packages:
       debounce: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /read-cache/1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -2639,13 +2628,11 @@ packages:
     resolution: {integrity: sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /scheduler/0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /screen-space-reflections/2.0.6_qztrmb73fbyyeqlmaoanzxlljy:
     resolution: {integrity: sha512-ZWMLb4YRFSkHbduJZPLVImmux5+LlCgkaya0aeYZvifMRvM83U9kYfdPVWt27NffjOtvju+jPZaM7aLOGElFYg==}
@@ -2857,7 +2844,6 @@ packages:
       react: '>=17.0'
     dependencies:
       react: 18.2.0
-    dev: false
 
   /tailwindcss/3.1.6:
     resolution: {integrity: sha512-7skAOY56erZAFQssT1xkpk+kWt2NrO45kORlxFPXUt3CiGsVPhH1smuH5XoDH6sGPXLyBv+zgCKA2HWBsgCytg==}
@@ -2922,7 +2908,6 @@ packages:
 
   /three/0.142.0:
     resolution: {integrity: sha512-ESjPO+3geFr+ZUfVMpMnF/eVU2uJPOh0e2ZpMFqjNca1wApS9lJb7E4MjwGIczgt9iuKd8PEm6Pfgp2bJ92Xtg==}
-    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
@@ -3145,4 +3130,3 @@ packages:
         optional: true
     dependencies:
       react: 18.2.0
-    dev: false

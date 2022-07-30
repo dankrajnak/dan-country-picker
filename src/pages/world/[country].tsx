@@ -315,26 +315,26 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     "comeHomeDate": "2022-10-04T00:40:00.000Z"
   }
   `);
-  if (false) {
-    const arrivalIndex = bestTrip.route.findIndex(
-      (route: any) => route.flyFrom === country.airport
-    );
-    const thereRoutes = bestTrip.route.slice(0, arrivalIndex);
-    const backRoutes = bestTrip.route.slice(arrivalIndex);
-    flightInfo = {
-      price: bestTrip.price,
-      gettingThere: thereRoutes.map((route: any) => ({
-        code: route.flyFrom,
-        name: route.cityFrom,
-      })),
-      gettingHome: backRoutes.map((route: any) => ({
-        code: route.flyTo,
-        name: route.cityTo,
-      })),
-      leaveOnDate: thereRoutes[0].utc_departure,
-      comeHomeDate: backRoutes[backRoutes.length - 1].utc_arrival,
-    };
-  }
+  // if (false) {
+  //   const arrivalIndex = bestTrip.route.findIndex(
+  //     (route: any) => route.flyFrom === country.airport
+  //   );
+  //   const thereRoutes = bestTrip.route.slice(0, arrivalIndex);
+  //   const backRoutes = bestTrip.route.slice(arrivalIndex);
+  //   flightInfo = {
+  //     price: bestTrip.price,
+  //     gettingThere: thereRoutes.map((route: any) => ({
+  //       code: route.flyFrom,
+  //       name: route.cityFrom,
+  //     })),
+  //     gettingHome: backRoutes.map((route: any) => ({
+  //       code: route.flyTo,
+  //       name: route.cityTo,
+  //     })),
+  //     leaveOnDate: thereRoutes[0].utc_departure,
+  //     comeHomeDate: backRoutes[backRoutes.length - 1].utc_arrival,
+  //   };
+  // }
 
   return { props: { country, flightInfo }, revalidate: 60 * 10 };
 };

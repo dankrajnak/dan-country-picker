@@ -1,10 +1,18 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { CubicBezierLine, OrbitControls, Stars } from "@react-three/drei";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import {
+  CubicBezierLine,
+  OrbitControls,
+  PerspectiveCamera,
+  Stars,
+} from "@react-three/drei";
 import WorldModel from "./WorldModel";
-import { DoubleSide, PointLight, Vector3 } from "three";
+import { PointLight, Vector3 } from "three";
 import { EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
 import { geoDistance, geoInterpolate } from "d3-geo";
+import { useThree } from "@react-three/fiber";
+import { useDrag } from "@use-gesture/react";
+import { a, SpringValue, useSpring } from "@react-spring/three";
 
 const latAndLong = (lon: number, lat: number, radius: number = 150) => {
   var phi = (90 - lat) * (Math.PI / 180),
@@ -61,13 +69,73 @@ const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   );
 };
 
+const seattlePos = latAndLong(Seattle[0], Seattle[1], 300);
+
 const Content = () => {
   const sunRef = useRef<PointLight>(null);
+  const cameraRef = useRef<any>(null);
+
   useFrame(({ clock }) => {
     const time = clock.elapsedTime / 20;
     if (sunRef.current) {
       sunRef.current.position.x = Math.sin(time) * 300;
       sunRef.current.position.z = Math.cos(time) * 300;
+    }
+    if (cameraRef.current) {
+      cameraRef.current.lookAt(0, 0, 0);
+    }
+  });
+
+  const { size } = useThree();
+  const [globeSpring, setGlobeSpring] = useSpring(() => ({
+    rotation: [0, 0, 0],
+    position: [0, 0, 0],
+    config: { mass: 1, friction: 40, tension: 800 },
+  }));
+  const bind = useDrag(({ movement: [x, y], down }) => {
+    if (down) {
+      document.body.style.cursor = "grabbing";
+    } else {
+      document.body.style.cursor = "default";
+    }
+    const xPercent = x / size.width / 2;
+    const yPercent = y / size.height / 2;
+    setGlobeSpring({
+      config: { mass: down ? 1 : 4, tension: down ? 2000 : 800 },
+      rotation: down
+        ? [yPercent * 2 * Math.PI, xPercent * 2 * Math.PI, 0]
+        : [0, 0, 0],
+      position: down
+        ? [0, 0, -(Math.abs(xPercent) + Math.abs(yPercent)) * 200]
+        : [0, 0, 0],
+    });
+  });
+
+  const posSprings = useMemo(
+    () => [
+      new SpringValue({
+        config: { mass: 40, friction: 400, tension: 200 },
+      }).set(Seattle[0]),
+      new SpringValue({
+        config: { mass: 40, friction: 400, tension: 200 },
+      }).set(Seattle[1]),
+    ],
+    []
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      posSprings[0].start({ to: l[0] });
+      posSprings[1].start({ to: l[1] });
+    }, 3000);
+  }, []);
+
+  useFrame(() => {
+    if (cameraRef.current) {
+      const pos = latAndLong(posSprings[0].get(), posSprings[1].get(), 400);
+      cameraRef.current.position.x = pos.x;
+      cameraRef.current.position.y = pos.y;
+      cameraRef.current.position.z = pos.z;
     }
   });
 
@@ -89,10 +157,28 @@ const Content = () => {
           bias={0.5} // occlusion bias
         />
       </EffectComposer>
-      <OrbitControls minDistance={160} zoomSpeed={0.1} />
-      <WorldModel scale={30} />
+
+      <PerspectiveCamera ref={cameraRef} makeDefault />
+
+      {/* <OrbitControls minDistance={160} zoomSpeed={0.1} /> */}
+      <ambientLight />
+
+      <a.group
+        // @ts-ignore
+        onPointerEnter={() => {
+          document.body.style.cursor = "grab";
+        }}
+        // @ts-ignore
+        onPointerLeave={() => {
+          document.body.style.cursor = "default";
+        }}
+        {...bind()}
+        {...globeSpring}
+      >
+        <WorldModel scale={30} />
+        <RouteLine start={Seattle} end={l} />
+      </a.group>
       <Stars radius={400} />
-      <RouteLine start={Seattle} end={l} />
 
       <pointLight
         ref={sunRef}
