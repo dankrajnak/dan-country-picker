@@ -1,19 +1,10 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { PropsWithChildren, Suspense, useRef, useState } from "react";
-import {
-  CubicBezierLine,
-  OrbitControls,
-  useGLTF,
-  QuadraticBezierLine,
-  useHelper,
-  Stars,
-  Sphere,
-} from "@react-three/drei";
+import { useRef, useState } from "react";
+import { CubicBezierLine, OrbitControls, Stars } from "@react-three/drei";
 import WorldModel from "./WorldModel";
 import { DoubleSide, PointLight, Vector3 } from "three";
 import { EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
 import { geoDistance, geoInterpolate } from "d3-geo";
-import { Line2 } from "three-stdlib";
 
 const latAndLong = (lon: number, lat: number, radius: number = 150) => {
   var phi = (90 - lat) * (Math.PI / 180),
@@ -33,13 +24,6 @@ const CapeTown: LngLat = [18.4233, -33.918861];
 const Lisbon: LngLat = [-9.142685, 38.736946];
 
 const l = CapeTown;
-// new Vector3().copy(seattle).lerp(dest, 0.5).multiplyScalar(20);
-
-const interp = (start, end, t) => () => {
-  const interpolate = geoInterpolate(start, end);
-
-  return latAndLong(interpolate(t)[0], interpolate(t)[1], 200);
-};
 
 const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   const startVec = latAndLong(start[0], start[1]);
@@ -51,8 +35,7 @@ const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   const midA = latAndLong(interpolate(0.25)[0], interpolate(0.25)[1], altitude);
   const midB = latAndLong(interpolate(0.75)[0], interpolate(0.75)[1], altitude);
 
-  const lineRef = useRef<Line2>(null);
-  const [dumb, setDumb] = useState(0);
+  const lineRef = useRef<any>(null);
   useFrame(({ clock }) => {
     const time = clock.elapsedTime * 3;
     if (lineRef.current) {
@@ -111,31 +94,12 @@ const Content = () => {
       <Stars radius={400} />
       <RouteLine start={Seattle} end={l} />
 
-      {/* <CatmullRomLine
-        curveType="chordal"
-        color="red"
-        points={[
-          seattle,
-          new Vector3()
-            .copy(seattle)
-            .lerp(dest, 0.5)
-            .normalize()
-            .multiplyScalar(180),
-          dest,
-        ]}
-        tension={0}
-      /> */}
       <pointLight
         ref={sunRef}
         color="white"
         intensity={3}
-        position={[300, 0, 300]}
+        position={[300, 100, 300]}
       />
-
-      {/* <mesh position={seattle.lerp(dest, 0.5).multiplyScalar(2)} scale={3}>
-        <sphereGeometry />
-        <meshBasicMaterial color="red" />
-      </mesh> */}
     </>
   );
 };
