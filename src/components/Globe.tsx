@@ -1,18 +1,13 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  CubicBezierLine,
-  OrbitControls,
-  PerspectiveCamera,
-  Stars,
-} from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { CubicBezierLine, PerspectiveCamera, Stars } from "@react-three/drei";
 import WorldModel from "./WorldModel";
 import { PointLight, Vector3 } from "three";
 import { EffectComposer, SMAA, SSAO } from "@react-three/postprocessing";
 import { geoDistance, geoInterpolate } from "d3-geo";
 import { useThree } from "@react-three/fiber";
 import { useDrag } from "@use-gesture/react";
-import { a, SpringValue, useSpring } from "@react-spring/three";
+import { a, SpringValue, useSpring, config } from "@react-spring/three";
 
 const latAndLong = (lon: number, lat: number, radius: number = 150) => {
   var phi = (90 - lat) * (Math.PI / 180),
@@ -24,21 +19,16 @@ const latAndLong = (lon: number, lat: number, radius: number = 150) => {
   return new Vector3(x, y, z);
 };
 
-type LngLat = [number, number];
+export type LngLat = [number, number];
 
-const Columbus: LngLat = [-82.98333, 39.9612];
 const Seattle: LngLat = [-122.335167, 47.608013];
-const CapeTown: LngLat = [18.4233, -33.918861];
-const Lisbon: LngLat = [-9.142685, 38.736946];
-
-const l = CapeTown;
 
 const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   const startVec = latAndLong(start[0], start[1]);
   const endVec = latAndLong(end[0], end[1]);
 
   const interpolate = geoInterpolate(start, end);
-  const altitude = Math.max(geoDistance(start, end) * 100, 180);
+  const altitude = Math.max(geoDistance(start, end) * 110, 180);
 
   const midA = latAndLong(interpolate(0.25)[0], interpolate(0.25)[1], altitude);
   const midB = latAndLong(interpolate(0.75)[0], interpolate(0.75)[1], altitude);
@@ -69,9 +59,11 @@ const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   );
 };
 
-const seattlePos = latAndLong(Seattle[0], Seattle[1], 300);
+const posSpring = new SpringValue<LngLat>({
+  config: { precision: 0.00001, mass: 80, tension: 200, friction: 120 },
+}).set(Seattle);
 
-const Content = () => {
+const Content = ({ destination }: { destination: LngLat }) => {
   const sunRef = useRef<PointLight>(null);
   const cameraRef = useRef<any>(null);
 
@@ -106,33 +98,23 @@ const Content = () => {
         ? [yPercent * 2 * Math.PI, xPercent * 2 * Math.PI, 0]
         : [0, 0, 0],
       position: down
-        ? [0, 0, -(Math.abs(xPercent) + Math.abs(yPercent)) * 200]
+        ? new Vector3()
+            .copy(cameraRef.current?.position)
+            .normalize()
+            .multiplyScalar(-(Math.abs(xPercent) + Math.abs(yPercent)) * 200)
+            .toArray()
         : [0, 0, 0],
     });
   });
 
-  const posSprings = useMemo(
-    () => [
-      new SpringValue({
-        config: { mass: 40, friction: 400, tension: 200 },
-      }).set(Seattle[0]),
-      new SpringValue({
-        config: { mass: 40, friction: 400, tension: 200 },
-      }).set(Seattle[1]),
-    ],
-    []
-  );
-
   useEffect(() => {
-    setTimeout(() => {
-      posSprings[0].start({ to: l[0] });
-      posSprings[1].start({ to: l[1] });
-    }, 3000);
-  }, []);
+    posSpring.start({ to: destination });
+  }, [destination]);
 
   useFrame(() => {
     if (cameraRef.current) {
-      const pos = latAndLong(posSprings[0].get(), posSprings[1].get(), 400);
+      const posSpringVal = posSpring.get();
+      const pos = latAndLong(posSpringVal[0], posSpringVal[1], 400);
       cameraRef.current.position.x = pos.x;
       cameraRef.current.position.y = pos.y;
       cameraRef.current.position.z = pos.z;
@@ -160,9 +142,6 @@ const Content = () => {
 
       <PerspectiveCamera ref={cameraRef} makeDefault />
 
-      {/* <OrbitControls minDistance={160} zoomSpeed={0.1} /> */}
-      {/* <ambientLight /> */}
-
       <a.group
         // @ts-ignore
         onPointerEnter={() => {
@@ -176,7 +155,7 @@ const Content = () => {
         {...globeSpring}
       >
         <WorldModel scale={30} />
-        <RouteLine start={Seattle} end={l} />
+        <RouteLine start={Seattle} end={destination} />
       </a.group>
       <Stars radius={400} />
 
@@ -190,10 +169,10 @@ const Content = () => {
   );
 };
 
-const Globe = () => {
+const Globe = ({ destination }: { destination: LngLat }) => {
   return (
     <Canvas>
-      <Content />
+      <Content destination={destination} />
     </Canvas>
   );
 };
