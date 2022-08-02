@@ -59,6 +59,8 @@ const RouteLine = ({ start, end }: { start: LngLat; end: LngLat }) => {
   );
 };
 
+const SUN_DISTANCE = 700;
+
 const posSpring = new SpringValue<LngLat>({
   config: { precision: 0.00001, mass: 80, tension: 200, friction: 120 },
 }).set(Seattle);
@@ -70,8 +72,8 @@ const Content = ({ destination }: { destination: LngLat }) => {
   useFrame(({ clock }) => {
     const time = clock.elapsedTime / 20;
     if (sunRef.current) {
-      sunRef.current.position.x = Math.sin(time) * 300;
-      sunRef.current.position.z = Math.cos(time) * 300;
+      sunRef.current.position.x = Math.sin(time) * SUN_DISTANCE;
+      sunRef.current.position.z = Math.cos(time) * SUN_DISTANCE;
     }
     if (cameraRef.current) {
       cameraRef.current.lookAt(0, 0, 0);
@@ -95,7 +97,7 @@ const Content = ({ destination }: { destination: LngLat }) => {
     setGlobeSpring({
       config: { mass: down ? 1 : 4, tension: down ? 2000 : 800 },
       rotation: down
-        ? [yPercent * 2 * Math.PI, xPercent * 2 * Math.PI, 0]
+        ? [(yPercent * 2 * Math.PI) / 10, xPercent * 2 * Math.PI, 0]
         : [0, 0, 0],
       position: down
         ? new Vector3()
@@ -162,8 +164,8 @@ const Content = ({ destination }: { destination: LngLat }) => {
       <pointLight
         ref={sunRef}
         color="white"
-        intensity={3}
-        position={[300, 100, 300]}
+        intensity={4}
+        position={[SUN_DISTANCE, 100, SUN_DISTANCE]}
       />
     </>
   );

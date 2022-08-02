@@ -15,15 +15,6 @@ const baseSansFonts = [
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            color: theme("colors.white"),
-          },
-        },
-      }),
-    },
     fontFamily: {
       sans: baseSansFonts,
     },

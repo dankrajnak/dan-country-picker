@@ -42,28 +42,20 @@ const Country = ({
     <>
       <Suspense fallback={null}>
         {
-          <div style={{ position: "absolute", height: "100%", width: "100%" }}>
+          <div className=" absolute h-full w-full">
             <Globe destination={country.lngLat} />
           </div>
         }
       </Suspense>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 20,
-          marginLeft: "auto",
-          marginRight: "auto",
-          zIndex: 0,
-          width: "100%",
-          // textAlign: "center",
-        }}
-      >
+      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 p-5 rounded-md bg-black bg-opacity-50 backdrop-blur-lg">
+        <div></div>
         <div className="text-white ">
           <div className=" border-white border-1">
             <h1 className="text-2xl tracking-tight font-extrabold mb-5">
               <span className=" font-light">{country.city},</span>{" "}
               {country.name}
             </h1>
+
             {flightInfo && (
               <FlightInfo
                 flightInfo={flightInfo}
@@ -71,6 +63,9 @@ const Country = ({
                 countryName={countryName}
               />
             )}
+            <Link href={"/world/" + getRandomCountry(countryName)}>
+              Spin again
+            </Link>
           </div>
         </div>
       </div>
@@ -107,7 +102,7 @@ const FlightInfo = ({
   country: Country;
   countryName: string;
 }) => {
-  const discount = useDiscount() || 200;
+  const discount = useDiscount();
   return (
     <div>
       {discount ? (
@@ -141,9 +136,6 @@ const FlightInfo = ({
             <span className="font-thin"> &rarr; </span>
           )}
         </div>
-        <div>
-          <Link href={"/world/" + getRandomCountry(countryName)}>Go again</Link>
-        </div>
       </div>
     </div>
   );
@@ -167,6 +159,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     throw new Error("Could not find country.");
   }
 
+  // @ts-ignore
   const country: Country = COUNTRIES[context.params?.country];
 
   const isDev = process.env.NODE_ENV === "development";
