@@ -42,18 +42,17 @@ const Country = ({
     <>
       <Suspense fallback={null}>
         {
-          <div className=" absolute h-full w-full">
+          <div className="fixed h-full w-full">
             <Globe destination={country.lngLat} />
           </div>
         }
       </Suspense>
-      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 p-5 rounded-md bg-black bg-opacity-50 backdrop-blur-lg">
+      <div className="fixed bottom-10 md:bottom-16 w-5/6 md:w-1/4  left-1/2 -translate-x-1/2 p-5 rounded-md bg-black bg-opacity-50 backdrop-blur-lg">
         <div></div>
         <div className="text-white ">
           <div className=" border-white border-1">
             <h1 className="text-2xl tracking-tight font-extrabold mb-5">
-              <span className=" font-light">{country.city},</span>{" "}
-              {country.name}
+              <span className="font-light">{country.city},</span> {country.name}
             </h1>
 
             {flightInfo && (
