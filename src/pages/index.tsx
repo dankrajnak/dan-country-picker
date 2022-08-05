@@ -12,31 +12,29 @@ const Home: NextPage = () => {
   const discount = useDiscount();
   return (
     <>
-      <div className="grid h-screen place-items-center text-white ">
+      <div className="grid h-screen place-items-center  ">
         <div className="relative group w-2/5">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-400 to-purple-600 bg-white rounded blur-lg opacity-75 "></div>
-          <div className="relative px-12 py-10 bg-black rounded-lg leading-none divide-x divide-gray-600">
-            <h1 className="text-2xl tracking-tight font-extrabold">
-              Welcome to the{" "}
-              <div className="tracking-tighter font-light">
-                country-that-you-can-go-to-to-visit-dan-while-he&apos;s-travelling{" "}
-              </div>
-              picker
-            </h1>
+          <div className="absolute -inset-0.5 bg-gradient-to-r bg-white rounded blur-sm opacity-75"></div>
+          <div className="relative px-12 py-10 bg-black rounded-lg">
+            <article className="prose prose-invert">
+              <h1 className="h1">Dan wants to see you</h1>
+              <h4>Again</h4>
+              {/* <p>Why isn't this working?</p> */}
 
-            <div className="mt-5">
-              <label className="text-sm font-medium text-white ">Name</label>
-              <div className="mt-1 relative rounded-md">
-                <input
-                  type="text"
-                  name="name"
-                  autoComplete="off"
-                  ref={inputRef}
-                  className="focus:ring-indigo-500 text-black focus:border-indigo-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="What's your name?"
-                />
+              <div className="mt-5">
+                <label className="text-sm font-medium  ">Name</label>
+                <div className="mt-1 relative rounded-md">
+                  <input
+                    type="text"
+                    name="name"
+                    autoComplete="off"
+                    ref={inputRef}
+                    className="focus:ring-gray-700 text-black focus:border-gray-700 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
+                    placeholder="What's your name?"
+                  />
+                </div>
               </div>
-            </div>
+            </article>
 
             {!currentUser && (
               <button
@@ -46,11 +44,12 @@ const Home: NextPage = () => {
                     setCurrentUser({ name });
                   }
                 }}
-                className="inline-block mt-5 text-center bg-gradient-to-r from-pink-400 to-purple-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700"
+                className="inline-block mt-5 text-center border border-transparent rounded-md py-3 px-8 font-medium text-white bg-sky-700 hover:bg-sky-900"
               >
                 Continue
               </button>
             )}
+
             {currentUser && (
               <div>
                 Alright, cool. You&apos;re {currentUser.name}.
