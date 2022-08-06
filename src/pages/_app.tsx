@@ -6,7 +6,7 @@ import { DefaultSeo } from "next-seo";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      <DefaultSeo title="Visit Dan" />
+      <DefaultSeo title="Dan Visitation" />
       <Component {...pageProps} />
     </RecoilRoot>
   );

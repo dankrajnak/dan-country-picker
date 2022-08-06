@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
-const PATH = "/globeSmall/scene.gltf";
+export const WORLD_PATH = "/globeSmall/scene.gltf";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -23,7 +23,7 @@ export default function WorldModel({
   ...props
 }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials, animations } = useGLTF(PATH) as GLTFResult;
+  const { nodes, materials, animations } = useGLTF(WORLD_PATH) as GLTFResult;
   const { actions } = useAnimations<any>(animations, group);
   useEffect(() => {
     // @ts-ignore
@@ -76,4 +76,6 @@ export default function WorldModel({
   );
 }
 
-useGLTF.preload(PATH);
+export const preload = () => {
+  /*#__PURE__*/ useGLTF.preload(WORLD_PATH);
+};

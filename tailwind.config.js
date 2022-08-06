@@ -17,6 +17,14 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: baseSansFonts,
+      serif: [
+        // "Merriweather",
+        // "Nanum Myeongjo",
+        // "Playfair Display",
+        // "EB Garamond",
+        "Noto Serif",
+        "sans-serif",
+      ],
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],

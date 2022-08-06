@@ -8,7 +8,7 @@ import {
 import useDiscount from "../../hooks/useDiscount";
 import { Suspense } from "react";
 import Globe from "../../components/Globe";
-import COUNTRIES, { type Country } from "../../countries";
+import COUNTRIES, { getRandomCountry, type Country } from "../../countries";
 import Link from "next/link";
 
 type Airport = {
@@ -24,15 +24,6 @@ type FlightInfo = {
   comeHomeDate: string;
 };
 
-export const getRandomCountry = (except?: string) => {
-  const countries = Object.keys(COUNTRIES);
-  let selected;
-  do {
-    selected = countries[Math.floor(Math.random() * countries.length)];
-  } while (except != null && except === selected);
-  return selected;
-};
-
 const Country = ({
   country,
   flightInfo,
@@ -40,6 +31,13 @@ const Country = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
+      <style global>
+        {`
+        body {
+          background-color: black !important;
+        }
+      `}
+      </style>
       <Suspense fallback={null}>
         {
           <div className="fixed h-full w-full">
@@ -161,7 +159,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   // @ts-ignore
   const country: Country = COUNTRIES[context.params?.country];
 
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === "development" || true;
 
   let flightInfo: FlightInfo | null = null;
   if (isDev) {

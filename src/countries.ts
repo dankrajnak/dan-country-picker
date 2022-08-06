@@ -110,4 +110,13 @@ const COUNTRIES = {
   },
 };
 
+export const getRandomCountry = (except?: string) => {
+  const countries = Object.keys(COUNTRIES);
+  let selected;
+  do {
+    selected = countries[Math.floor(Math.random() * countries.length)];
+  } while (except != null && except === selected);
+  return selected;
+};
+
 export default COUNTRIES;
