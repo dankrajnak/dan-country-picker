@@ -53,12 +53,17 @@ const Country = ({
               <span className="font-light">{country.city},</span> {country.name}
             </h1>
 
-            {flightInfo && (
+            {flightInfo ? (
               <FlightInfo
                 flightInfo={flightInfo}
                 country={country}
                 countryName={countryName}
               />
+            ) : (
+              <div>
+                It&apos;s too early to gather flight information for this
+                destination
+              </div>
             )}
             <div className="h-5" />
             <Link href={"/world/" + getRandomCountry(countryName)}>
