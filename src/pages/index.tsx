@@ -1,9 +1,7 @@
-import { useGLTF } from "@react-three/drei";
 import type { NextPage } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { forwardRef, useEffect } from "react";
-import { ButtonHTMLAttributes, DetailedHTMLProps, useId, useRef } from "react";
+import { useId, useRef } from "react";
 import { useRecoilState } from "recoil";
 import CURRENT_USER_ATOM from "../atoms/currentUser.atom";
 import { Button } from "../components/LinkButton";
