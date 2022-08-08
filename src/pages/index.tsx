@@ -91,12 +91,12 @@ const Home: NextPage = () => {
 
         <div className="mt-4">
           <small className=" italic">
-            Dan provides equal employment opportunities to all applicants and
-            prohibits discrimination and harassment of any type without regard
-            to race, color, religion, age, sex, national origin, disability
-            status, genetics, protected veteran status, sexual orientation,
-            gender identity or expression, or any other characteristic protected
-            by federal, state or local laws.
+            Dan provides equal opportunities to all applicants and prohibits
+            discrimination and harassment of any type without regard to race,
+            color, religion, age, sex, national origin, disability status,
+            genetics, protected veteran status, sexual orientation, gender
+            identity or expression, or any other characteristic protected by
+            federal, state or local laws.
           </small>
         </div>
       </article>
