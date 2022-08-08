@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { ButtonHTMLAttributes, DetailedHTMLProps, useId, useRef } from "react";
 import { useRecoilState } from "recoil";
 import CURRENT_USER_ATOM from "../atoms/currentUser.atom";
@@ -36,6 +36,10 @@ const Home: NextPage = () => {
   const [currentUser, setCurrentUser] = useRecoilState(CURRENT_USER_ATOM);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/applicationSubmission");
+  }, [router]);
 
   return (
     <PaperLayout>
