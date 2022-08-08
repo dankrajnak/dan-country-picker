@@ -25,14 +25,14 @@ const ApplicationSubmission = () => {
           inProcessMessage: "Submitting Application",
           completedMessage: "Application Submitted",
         },
-        action: makeTimeoutAction(3000),
+        action: makeTimeoutAction(4000),
       },
       {
         step: {
           inProcessMessage: "Processing Application",
           completedMessage: "Application Processed",
         },
-        action: makeTimeoutAction(5000),
+        action: makeTimeoutAction(7000),
       },
       {
         step: {
@@ -40,7 +40,7 @@ const ApplicationSubmission = () => {
           completedMessage: "Application Accepted!",
         },
         action: async () => {
-          await makeTimeoutPromise(10_000);
+          await makeTimeoutPromise(15_000);
           setIsFinished(true);
         },
       },
