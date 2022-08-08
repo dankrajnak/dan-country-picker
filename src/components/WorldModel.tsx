@@ -17,7 +17,6 @@ type GLTFResult = GLTF & {
 };
 
 type ActionName = "Take 001";
-type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
 export default function WorldModel({
   ...props
@@ -75,7 +74,3 @@ export default function WorldModel({
     </group>
   );
 }
-
-export const preload = () => {
-  /*#__PURE__*/ useGLTF.preload(WORLD_PATH);
-};

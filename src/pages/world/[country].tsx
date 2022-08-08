@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import Globe from "../../components/Globe";
 import COUNTRIES, { getRandomCountry, type Country } from "../../countries";
 import Link from "next/link";
+import { asCurrency } from "../../utils";
 
 type Airport = {
   code: string;
@@ -46,7 +47,6 @@ const Country = ({
         }
       </Suspense>
       <div className="fixed bottom-10 md:bottom-16 w-5/6 md:w-1/4  left-1/2 -translate-x-1/2 p-5 rounded-md bg-black bg-opacity-50 backdrop-blur-lg">
-        <div></div>
         <div className="text-white ">
           <div className=" border-white border-1">
             <h1 className="text-2xl tracking-tight font-extrabold mb-5">
@@ -60,8 +60,9 @@ const Country = ({
                 countryName={countryName}
               />
             )}
+            <div className="h-5" />
             <Link href={"/world/" + getRandomCountry(countryName)}>
-              Spin again
+              <a className="no-underline font-bold">Pick again</a>
             </Link>
           </div>
         </div>
@@ -77,13 +78,6 @@ const arrayJoin = (arr: any[], elm: unknown): any[] => {
     []
   );
 };
-
-const asCurrency = (number: number): string =>
-  Intl.NumberFormat("en-us", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-  }).format(number);
 
 const asDateString = (date: string): string =>
   Intl.DateTimeFormat("en-us", {
@@ -159,7 +153,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   // @ts-ignore
   const country: Country = COUNTRIES[context.params?.country];
 
-  const isDev = process.env.NODE_ENV === "development" || true;
+  const isDev = process.env.NODE_ENV === "development";
 
   let flightInfo: FlightInfo | null = null;
   if (isDev) {

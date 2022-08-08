@@ -79,7 +79,7 @@ const COUNTRIES = {
   lima: {
     name: "Peru",
     city: "Lima",
-    airport: "LAP",
+    airport: "LIM",
     month: "05",
     year: "2023",
     lngLat: [-77.042793, -12.046374],
